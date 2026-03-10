@@ -1,4 +1,4 @@
---[[
+[[
   ╔══════════════════════════════════════════════════════════╗
   ║   BADDIES 💅  SCRIPT  v2.0  — by killitzwill            ║
   ║   HARDCODED REMOTES — fully working combat              ║
@@ -34,14 +34,23 @@ local char, hum, hrp
 -- ══════════════════════════════════════════════
 --  HARDCODED REMOTES
 -- ══════════════════════════════════════════════
+local function safeGet(name)
+    local ok, result = pcall(function() return RS:WaitForChild(name, 5) end)
+    if ok and result then return result end
+    local found = RS:FindFirstChild(name, true)
+    if found then return found end
+    warn("[Baddies] Remote not found: " .. name)
+    return nil
+end
+
 local REM = {
-    PUNCH     = RS:WaitForChild("PUNCHEVENT",     10),
-    HAIRPULL  = RS:WaitForChild("JALADADEPELOEVENT", 10),
-    STOMP     = RS:WaitForChild("STOMPEVENT",     10),
-    RAGDOLL   = RS:WaitForChild("RAGDOLLEVENT",   10),
-    CARRY     = RS:WaitForChild("CARRYEVENT",     10),
-    GIVECASH  = RS:WaitForChild("GIVECASHEVENT",  10),
-    PVPTOGGLE = RS:WaitForChild("PVPONOFFEVENT",  10),
+    PUNCH     = safeGet("PUNCHEVENT"),
+    HAIRPULL  = safeGet("JALADADEPELOEVENT"),
+    STOMP     = safeGet("STOMPEVENT"),
+    RAGDOLL   = safeGet("RAGDOLLEVENT"),
+    CARRY     = safeGet("CARRYEVENT"),
+    GIVECASH  = safeGet("GIVECASHEVENT"),
+    PVPTOGGLE = safeGet("PVPONOFFEVENT"),
 }
 
 -- ══════════════════════════════════════════════
